@@ -13,11 +13,15 @@ jobs:
           persist-credentials: false
       - name: Build
         run: |
-          mkdir build
-          rsync -a src/ build/
+          # mkdir build
+          # rsync -a src/ build/
+          cd frontend
+          yarn
+          yarn build         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          # publish_dir: ./build
+          publish_dir: ./frontend/dist
           cname: ${{ secrets.CNAME }}
